@@ -6,14 +6,6 @@ body {
     font-family: sans-serif;
 }
 
-.container-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-areas: "form-grid table-grid table-grid";
-    grid-gap: 40px;
-    padding: 20px 100px;
-}
-
 /* Barra de navegación */
 .navbar {
     background-color: rgb(97, 62, 153);
@@ -26,49 +18,16 @@ body {
     font-size: 1.5rem;
 }
 
-/* Advertencias */
-.alert {
-    /* display: flex; */
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 7px;
-    height: 45px;
-    border-radius: 3px;
-    padding-left: 10px;
-    padding-right: 20px;
+/* Contenedor Grid */
+.container-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-areas: "form-grid table-grid";
+    grid-gap: 40px;
+    padding: 20px 100px;
 }
 
-.alert strong {
-
-}
-
-.warning {
-    display: none;
-    background-color: #EC7063;
-}
-
-.check {
-    display: none;
-    background-color: #58D68D;
-}
-
-.close-alert {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 3px;
-    border: 1px black solid;
-    padding: 2px;
-    width: 20px;
-    height: 20px;
-}
-
-svg {
-    width: 15px;
-}
-
-/* Formulario para registrar tareas */
+/* Estilos generales de formularios */
 .form-grid {
     grid-area: form-grid;
 }
@@ -107,9 +66,24 @@ svg {
     border: 1px solid #999999;
 }
 
+.card-form button:hover {
+    cursor: pointer;
+}
+
 .card-form input:focus,
 .card-form textarea:focus {
     box-shadow: 0px 0px 5px 5px #5DADE2;
+}
+
+/* Estilos para formulario actualizar */
+.formUpdateDisplay {
+    display: none;
+}
+
+.container-buttons {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 10px;
 }
 
 /* Tabla para mostrar los registros */
@@ -120,6 +94,7 @@ svg {
 .table-grid table {
     width: 100%;
     table-layout: fixed;
+    border-collapse: collapse;
 }
 
 thead th:nth-child(2) {
@@ -152,21 +127,54 @@ table tr:last-child td:last-child {
     border-bottom-right-radius: 10px;
 } */
 
-.table-grid table {
-    border-collapse: collapse;
-}
-
 .table-grid th,
 .table-grid td { 
     padding: 5px;
-    word-break: break-all;
+    word-wrap: break-word;
     border-left: 1px black solid;
     border-right: 1px black solid;
+    text-align: center;
 }
 
 .table-grid tr {
     border-bottom: 1px black solid;
     border-top: 1px black solid;
+}
+
+/* Estilos para botones Borrar y Actualizar */
+.td-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.td-buttons button {
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+
+    /* height: 40px; */
+    padding: 2px 0 2px 0; 
+    width: 100%;
+    border: 1px solid #999999;
+    border-radius: 3px;
+}
+
+svg {
+    pointer-events: none;
+    height: 20px;
+}
+
+/* Animación para ultima tarea creada */
+@keyframes anim{
+    0% {background-color: rgb(88, 214, 141);} /*Amarillo*/
+    100% {background-color: rgb(88, 214, 141, 0);} /*Amarillo*/
+}
+
+.color {
+  animation-name: anim;
+  animation-duration: 2s;
+  /* animation-iteration-count: infinite; */
 }
 
 /* Media query para modificar el Grid */

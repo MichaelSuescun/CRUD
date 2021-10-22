@@ -6,7 +6,7 @@
 
     $title = $_POST["title"];
     $description = $_POST["description"];
-    // $response = array();
+    $response = array();
 
     try {
         $connection->beginTransaction();
@@ -18,9 +18,20 @@
         $query->execute();
 
         $connection->commit();
+
+        $response["status"] = true;
+        $response["icon"] = "success";
+        $response["answer"] = "Tarea registrada";
     } catch (\Throwable $th) {
         $connection->rollBack();
+
+        $response["status"] = false;
+        $response["icon"] = "warning";
+        $response["answer"] = "Tarea no registrada";
+
         exit();
     }
+
+    echo json_encode($response);
 
     exit();

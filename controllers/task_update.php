@@ -4,13 +4,17 @@
     $Connection = new Connection_DB();
     $connection = $Connection->connect();
 
+    $title = $_POST["title"];
+    $description = $_POST["description"];
     $id = $_POST["id"];
     $response = array();
 
     try {
         $connection->beginTransaction();
 
-        $query = $connection->prepare("DELETE FROM task WHERE id = :id");
+        $query = $connection->prepare("UPDATE task SET title = :title, description = :description WHERE id = :id");
+        $query->bindParam(":title", $title);
+        $query->bindParam(":description", $description);
         $query->bindParam(":id", $id);
         $query->execute();
 
@@ -18,13 +22,13 @@
 
         $response["status"] = true;
         $response["icon"] = "success";
-        $response["answer"] = "Tarea eliminada";
+        $response["answer"] = "Tarea actualizada";
     } catch (\Throwable $th) {
         $connection->rollBack();
 
         $response["status"] = false;
         $response["icon"] = "warning";
-        $response["answer"] = "Tarea no eliminada";
+        $response["answer"] = "Tarea no actualizada";
 
         exit();
     }
